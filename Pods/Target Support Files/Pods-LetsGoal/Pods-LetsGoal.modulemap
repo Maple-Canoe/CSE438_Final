@@ -1,0 +1,6 @@
+framework module Pods_LetsGoal {
+  umbrella header "Pods-LetsGoal-umbrella.h"
+
+  export *
+  module * { export * }
+}
