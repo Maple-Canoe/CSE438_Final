@@ -127,7 +127,7 @@
             </objects>
             <point key="canvasLocation" x="1973.8461538461538" y="-285.07109004739334"/>
         </scene>
-        <!--Goal View Controller-->
+        <!--Item-->
         <scene sceneID="hFN-OO-6bD">
             <objects>
                 <viewController storyboardIdentifier="goal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tu3-Mf-Ubq" customClass="GoalViewController" customModule="LetsGoal" customModuleProvider="target" sceneMemberID="viewController">
@@ -135,32 +135,138 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbH-Vg-XCd">
-                                <rect key="frame" x="168" y="620" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbH-Vg-XCd">
+                                <rect key="frame" x="167.66666666666666" y="681" width="55" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="H3E-2w-EOd"/>
+                                </constraints>
                                 <state key="normal" title="Log Out"/>
                                 <connections>
                                     <action selector="logOut:" destination="tu3-Mf-Ubq" eventType="touchUpInside" id="apf-No-Phf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZ9-8n-fxf">
-                                <rect key="frame" x="16" y="88" width="358" height="103"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZ9-8n-fxf">
+                                <rect key="frame" x="130.33333333333331" y="84" width="129.33333333333331" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="lBT-KE-KyV"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rfg-JN-FGX">
+                                <rect key="frame" x="340" y="144" width="20" height="22"/>
+                                <state key="normal" image="plus" catalog="system"/>
+                                <connections>
+                                    <action selector="addGoal:" destination="tu3-Mf-Ubq" eventType="touchUpInside" id="Ilo-em-ga4"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cou-li-wkT">
+                                <rect key="frame" x="30" y="176" width="330" height="475"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XID-aZ-gid"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Rfg-JN-FGX" firstAttribute="top" secondItem="XID-aZ-gid" secondAttribute="top" constant="100" id="CPd-8n-Dgl"/>
+                            <constraint firstItem="Rfg-JN-FGX" firstAttribute="leading" secondItem="XID-aZ-gid" secondAttribute="leading" constant="340" id="Dn5-19-YaT"/>
+                            <constraint firstItem="UbH-Vg-XCd" firstAttribute="centerX" secondItem="r9T-ip-KJX" secondAttribute="centerX" id="Jxh-Lc-6R9"/>
+                            <constraint firstItem="XID-aZ-gid" firstAttribute="trailing" secondItem="Cou-li-wkT" secondAttribute="trailing" constant="30" id="Kvw-b5-Scr"/>
+                            <constraint firstItem="YZ9-8n-fxf" firstAttribute="centerX" secondItem="r9T-ip-KJX" secondAttribute="centerX" id="Sxo-BK-BEo"/>
+                            <constraint firstItem="XID-aZ-gid" firstAttribute="trailing" secondItem="Rfg-JN-FGX" secondAttribute="trailing" constant="30" id="WQ3-iY-f2e"/>
+                            <constraint firstItem="UbH-Vg-XCd" firstAttribute="top" secondItem="Cou-li-wkT" secondAttribute="bottom" constant="30" id="a3s-mY-O7N"/>
+                            <constraint firstItem="Cou-li-wkT" firstAttribute="top" secondItem="Rfg-JN-FGX" secondAttribute="bottom" constant="10" id="hCG-j4-P40"/>
+                            <constraint firstItem="XID-aZ-gid" firstAttribute="bottom" secondItem="UbH-Vg-XCd" secondAttribute="bottom" constant="50" id="j55-e9-617"/>
+                            <constraint firstItem="Cou-li-wkT" firstAttribute="leading" secondItem="XID-aZ-gid" secondAttribute="leading" constant="30" id="o0u-J6-fT7"/>
+                            <constraint firstItem="YZ9-8n-fxf" firstAttribute="top" secondItem="XID-aZ-gid" secondAttribute="top" constant="40" id="tmp-nW-w1b"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="info.circle" catalog="system" id="lfj-cO-naM"/>
                     <connections>
+                        <outlet property="addButton" destination="Rfg-JN-FGX" id="BjN-21-57L"/>
+                        <outlet property="goals" destination="Cou-li-wkT" id="gXt-fa-PYS"/>
                         <outlet property="welcomeUser" destination="YZ9-8n-fxf" id="Sdk-ep-oU7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5VR-Xe-SSR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2973.8461538461538" y="31.990521327014218"/>
+            <point key="canvasLocation" x="3990.7692307692305" y="-107.34597156398104"/>
+        </scene>
+        <!--Popover Content Controller-->
+        <scene sceneID="chX-BN-p0J">
+            <objects>
+                <viewController storyboardIdentifier="popover" id="u6p-mP-I5j" customClass="PopoverContentController" customModule="LetsGoal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zdt-tE-0Qe">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6lc-7G-zWb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4GV-hf-rgr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4748" y="-107"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="AEd-vp-6pm">
+            <objects>
+                <tabBarController storyboardIdentifier="tab" id="WXH-js-whp" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mbU-gT-4rL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="tu3-Mf-Ubq" kind="relationship" relationship="viewControllers" id="gpO-61-s2I"/>
+                        <segue destination="HGn-d4-rJa" kind="relationship" relationship="viewControllers" id="KEs-jY-hft"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CUY-Bb-zYR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2912" y="141"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="2cW-lg-7x7">
+            <objects>
+                <viewController id="HGn-d4-rJa" customClass="CalendarViewController" customModule="LetsGoal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tH5-As-JSL">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zr0-cJ-zDc" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="44" width="390" height="360"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="360" id="Jzu-ef-GIK"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JMm-EO-Y5b">
+                                <rect key="frame" x="0.0" y="404" width="390" height="357"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GKA-UU-5tw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JMm-EO-Y5b" firstAttribute="leading" secondItem="GKA-UU-5tw" secondAttribute="leading" id="7TJ-et-1eY"/>
+                            <constraint firstItem="Zr0-cJ-zDc" firstAttribute="leading" secondItem="GKA-UU-5tw" secondAttribute="leading" id="CFo-g5-AJs"/>
+                            <constraint firstItem="GKA-UU-5tw" firstAttribute="bottom" secondItem="JMm-EO-Y5b" secondAttribute="bottom" id="DIr-CA-KY2"/>
+                            <constraint firstItem="Zr0-cJ-zDc" firstAttribute="top" secondItem="GKA-UU-5tw" secondAttribute="top" id="J4H-Jy-HaA"/>
+                            <constraint firstItem="GKA-UU-5tw" firstAttribute="trailing" secondItem="Zr0-cJ-zDc" secondAttribute="trailing" id="RN9-8r-AIv"/>
+                            <constraint firstItem="JMm-EO-Y5b" firstAttribute="top" secondItem="Zr0-cJ-zDc" secondAttribute="bottom" id="Yjh-Sj-Esq"/>
+                            <constraint firstItem="GKA-UU-5tw" firstAttribute="trailing" secondItem="JMm-EO-Y5b" secondAttribute="trailing" id="y99-uI-bH9"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="calendar" catalog="system" id="Xif-Da-7ZJ"/>
+                    <connections>
+                        <outlet property="calendar" destination="Zr0-cJ-zDc" id="yLV-YM-mnr"/>
+                        <outlet property="tableView" destination="JMm-EO-Y5b" id="giQ-Tb-8ih"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5IP-pJ-O1w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3991" y="574"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="X7F-RP-mmk">
@@ -249,6 +355,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

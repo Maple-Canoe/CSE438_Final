@@ -36,8 +36,8 @@ class LoginViewController: UIViewController {
                     self.errorMessage.text = error.localizedDescription
                     self.errorMessage.alpha = 1
                 } else {
-                    let goalVC = self.storyboard?.instantiateViewController(withIdentifier: "goal") as! GoalViewController
-                    self.view.window?.rootViewController = goalVC
+                    let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! UITabBarController
+                    self.view.window?.rootViewController = tabVC
                     self.view.window?.makeKeyAndVisible()
                 }
             }

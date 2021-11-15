@@ -3,19 +3,29 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class GoalViewController: UIViewController {
+//Reference: https://stackoverflow.com/questions/61657140/how-to-create-a-popover-viewcontroller-like-apples-one
+
+class GoalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
     
     var handle: AuthStateDidChangeListenerHandle?
     var currentUserID: String?
     let db = Firestore.firestore()
     @IBOutlet weak var welcomeUser: UILabel!
+    @IBOutlet weak var goals: UITableView!
+    @IBOutlet weak var addButton: UIButton!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         let user = Auth.auth().currentUser
-        
         self.db.collection("users").whereField("uid", isEqualTo: user!.uid).getDocuments { snapshot, error in
             if error != nil {
                 print(error!)
@@ -28,7 +38,29 @@ class GoalViewController: UIViewController {
         }
         
     }
-//
+    
+    @IBAction func addGoal(_ sender: Any) {
+        let buttonFrame = addButton.frame
+        print(buttonFrame)
+        let popoverContentController = self.storyboard?.instantiateViewController(identifier: "popover") as? PopoverContentController
+        popoverContentController?.modalPresentationStyle = .popover
+        
+        if let popoverPresentationController = popoverContentController?.popoverPresentationController {
+            popoverPresentationController.permittedArrowDirections = .up
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect = buttonFrame
+            popoverPresentationController.delegate = self
+            
+            if let popoverController = popoverContentController {
+                present(popoverController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    //
 //    override func viewWillAppear(_ animated: Bool) {
 //        handle = Auth.auth().addStateDidChangeListener { auth, user in
 //            self.currentUserID = user?.uid
