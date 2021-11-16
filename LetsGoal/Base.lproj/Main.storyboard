@@ -356,6 +356,40 @@
             </objects>
             <point key="canvasLocation" x="4920" y="573.69668246445497"/>
         </scene>
+        <!--Popover Detail Controller-->
+        <scene sceneID="6sB-rb-ZqG">
+            <objects>
+                <viewController storyboardIdentifier="detail" id="32j-vT-qf4" customClass="PopoverDetailController" customModule="LetsGoal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S1t-lK-oyn">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14t-e0-Dsp">
+                                <rect key="frame" x="30" y="74" width="330" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="djU-fb-BxX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lWh-81-NOa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="14t-e0-Dsp" firstAttribute="top" secondItem="lWh-81-NOa" secondAttribute="top" constant="30" id="Kag-9S-FGN"/>
+                            <constraint firstItem="14t-e0-Dsp" firstAttribute="leading" secondItem="lWh-81-NOa" secondAttribute="leading" constant="30" id="P0z-gN-KXN"/>
+                            <constraint firstItem="lWh-81-NOa" firstAttribute="trailing" secondItem="14t-e0-Dsp" secondAttribute="trailing" constant="30" id="VLj-MW-L90"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="desc" destination="14t-e0-Dsp" id="hDm-BE-Ob2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lr4-c8-9Ny" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5676.9230769230771" y="573.69668246445497"/>
+        </scene>
         <!--Registration View Controller-->
         <scene sceneID="X7F-RP-mmk">
             <objects>

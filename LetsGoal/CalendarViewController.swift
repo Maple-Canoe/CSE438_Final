@@ -13,13 +13,14 @@ import FirebaseAuth
 
 //Reference: https://www.youtube.com/watch?v=5Jwlet8L84w
 
-class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDelegate, UITableViewDataSource {
+class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     
     var tasks : [String] = []
     var selectedDate: String = ""
+    var descript: [String] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
@@ -52,6 +53,7 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         let db = Firestore.firestore()
         let uid = Auth.auth().currentUser!.uid
         tasks = []
+        descript = []
         db.collection("events").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
             if error != nil {
                 print(error!)
@@ -64,7 +66,9 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
                     print("task date is \(taskDate)")
                     if self.selectedDate == taskDate {
                         let event_name = document.data()["event_name"] as! String
+                        let event_detail = document.data()["event_description"] as! String
                         self.tasks.append(event_name)
+                        self.descript.append(event_detail)
                     }
                 }
                 self.tableView.reloadData()
@@ -72,6 +76,30 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)!
+        let cellFrame = cell.frame
+        print(cellFrame)
+        let popoverDetailController = self.storyboard?.instantiateViewController(identifier: "detail") as? PopoverDetailController
+        popoverDetailController?.text = descript[indexPath.row]
+        popoverDetailController?.modalPresentationStyle = .popover
+        
+        if let popoverPresentationController = popoverDetailController?.popoverPresentationController {
+            popoverPresentationController.permittedArrowDirections = .down
+            popoverPresentationController.sourceView = self.tableView
+            popoverPresentationController.sourceRect = cellFrame
+            popoverPresentationController.delegate = self
+            
+            if let popoverController = popoverDetailController {
+                print(popoverController.view.frame)
+                present(popoverController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
     /*
     // MARK: - Navigation
 
