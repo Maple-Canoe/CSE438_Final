@@ -28,6 +28,15 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
         return task
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            tasks.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+    }
+    
   
     override func viewDidLoad() {
         

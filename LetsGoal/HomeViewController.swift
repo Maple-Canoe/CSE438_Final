@@ -16,6 +16,9 @@ class HomeViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
         let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "login") as! LoginViewController
         self.view.window?.rootViewController = loginVC
+        
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+//        navigationController?.pushViewController(loginVC, animated: true)
         self.view.window?.makeKeyAndVisible()
     }
     
@@ -23,6 +26,7 @@ class HomeViewController: UIViewController {
         let registrationVC = self.storyboard?.instantiateViewController(withIdentifier: "registration") as! RegistrationViewController
         self.view.window?.rootViewController = registrationVC
         self.view.window?.makeKeyAndVisible()
+
     }
     
 }

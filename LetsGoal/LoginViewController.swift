@@ -22,6 +22,12 @@ class LoginViewController: UIViewController {
 
     }
     
+    @IBAction func back(_ sender: Any) {
+        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "home") as! HomeViewController
+        self.view.window?.rootViewController = homeVC
+        self.view.window?.makeKeyAndVisible()
+    }
+    
     @IBAction func signIn(_ sender: Any) {
         let email = email.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = password.text!.trimmingCharacters(in: .whitespacesAndNewlines)
