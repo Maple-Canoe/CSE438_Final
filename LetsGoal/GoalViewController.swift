@@ -6,27 +6,37 @@ import FirebaseFirestore
 //Reference: https://stackoverflow.com/questions/61657140/how-to-create-a-popover-viewcontroller-like-apples-one
 
 class GoalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
     
     var handle: AuthStateDidChangeListenerHandle?
     var currentUserID: String?
     let db = Firestore.firestore()
+    let uid = Auth.auth().currentUser!.uid
+    
     @IBOutlet weak var welcomeUser: UILabel!
     @IBOutlet weak var goals: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
+    var tasks : [String] = []
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let task = tableView.dequeueReusableCell(withIdentifier: "task")! as UITableViewCell
+        task.textLabel!.text = tasks[indexPath.row]
+        return task
+    }
+    
+  
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        let user = Auth.auth().currentUser
-        self.db.collection("users").whereField("uid", isEqualTo: user!.uid).getDocuments { snapshot, error in
+        goals.register(UITableViewCell.self, forCellReuseIdentifier: "task")
+        goals.dataSource = self
+        
+        self.db.collection("users").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
             if error != nil {
                 print(error!)
             } else {
@@ -36,8 +46,28 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
         }
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchTasks()
+    }
+    
+    func fetchTasks() {
+        tasks = []
+        db.collection("events").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
+            if error != nil {
+                print(error!)
+            } else {
+                for document in (snapshot?.documents)! {
+                    let event_name = document.data()["event_name"] as! String
+                    self.tasks.append(event_name)
+                    print(event_name)
+                }
+                self.goals.reloadData()
+            }
+        }
+    }
+    
     
     @IBAction func addGoal(_ sender: Any) {
         let buttonFrame = addButton.frame
@@ -55,38 +85,17 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
                 present(popoverController, animated: true, completion: nil)
             }
         }
+        
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-    //
-//    override func viewWillAppear(_ animated: Bool) {
-//        handle = Auth.auth().addStateDidChangeListener { auth, user in
-//            self.currentUserID = user?.uid
-//
-//            self.db.collection("users").whereField("uid", isEqualTo: self.currentUserID!).getDocuments { snapshot, error in
-//                if error != nil {
-//                    print(error!)
-//                } else {
-//                    let document = (snapshot?.documents)![0]
-//                    if let username = document.data()["username"] as? String {
-//                        self.welcomeUser.text = "Welcome, \(username)!"
-//                    }
-//                }
-//            }
-//
-//        }
-//
-//
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        Auth.auth().removeStateDidChangeListener(handle!)
-//
-//    }
-//
-  
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        fetchTasks()
+    }
+    
     @IBAction func logOut(_ sender: Any) {
         if Auth.auth().currentUser != nil {
             do {

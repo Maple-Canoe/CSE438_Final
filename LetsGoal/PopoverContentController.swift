@@ -1,29 +1,43 @@
-//
-//  PopoverContentController.swift
-//  LetsGoal
-//
-//  Created by Alex Xu on 11/15/21.
-//
-
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class PopoverContentController: UIViewController {
+    
+    @IBOutlet weak var eventName: UITextView!
+    @IBOutlet weak var eventDescription: UITextView!
+    @IBOutlet weak var eventTime: UIDatePicker!
+    
+    let db = Firestore.firestore()
+    let uid = Auth.auth().currentUser!.uid
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        // Do any additional setup after loading the view.
+    
+    @IBAction func submit(_ sender: Any) {
+        if !eventName.hasText || !eventDescription.hasText {
+            let alert = UIAlertController(title: "Incorrect Input!", message: "Please fill in an event name and an event description.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "I see", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        } else {
+            db.collection("events").addDocument(data: ["uid" : uid, "event_name" : eventName.text!, "event_description" : eventDescription.text!, "event_time" : eventTime.date])
+            eventName.text = ""
+            eventDescription.text = ""
+            
+            let alert = UIAlertController(title: "Event Created!", message: "A new event has been added to your task list.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "I see", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+          
     }
     
+    
+    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
