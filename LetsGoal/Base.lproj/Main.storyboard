@@ -197,6 +197,7 @@
                     <connections>
                         <outlet property="addButton" destination="Rfg-JN-FGX" id="BjN-21-57L"/>
                         <outlet property="goals" destination="Cou-li-wkT" id="gXt-fa-PYS"/>
+                        <outlet property="tableView" destination="Cou-li-wkT" id="itS-qS-KFA"/>
                         <outlet property="welcomeUser" destination="YZ9-8n-fxf" id="Sdk-ep-oU7"/>
                     </connections>
                 </viewController>
