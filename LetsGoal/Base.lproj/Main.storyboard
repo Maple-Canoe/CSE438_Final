@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XkE-bg-Edy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993.84615384615381" y="42.654028436018955"/>
+            <point key="canvasLocation" x="1922" y="227"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -112,9 +112,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHI-2T-4rq">
+                                <rect key="frame" x="30" y="44" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="back:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d57-Ph-Lya"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JHI-2T-4rq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="U5n-ve-6jn"/>
+                            <constraint firstItem="JHI-2T-4rq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hLR-Ct-F4l"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LbY-a8-xHL"/>
                     <connections>
@@ -125,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973.8461538461538" y="-285.07109004739334"/>
+            <point key="canvasLocation" x="2903.0769230769229" y="-285.07109004739334"/>
         </scene>
         <!--Task-->
         <scene sceneID="hFN-OO-6bD">
@@ -191,7 +202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5VR-Xe-SSR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3990.7692307692305" y="-107.34597156398104"/>
+            <point key="canvasLocation" x="4920" y="-107.34597156398104"/>
         </scene>
         <!--Popover Content Controller-->
         <scene sceneID="chX-BN-p0J">
@@ -283,7 +294,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GV-hf-rgr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4747.6923076923076" y="-107.34597156398104"/>
+            <point key="canvasLocation" x="5676.9230769230771" y="-107.34597156398104"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="AEd-vp-6pm">
@@ -301,7 +312,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUY-Bb-zYR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2912" y="141"/>
+            <point key="canvasLocation" x="3840" y="140.75829383886256"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="2cW-lg-7x7">
@@ -343,7 +354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5IP-pJ-O1w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3991" y="574"/>
+            <point key="canvasLocation" x="4920" y="573.69668246445497"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="X7F-RP-mmk">
@@ -414,9 +425,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Se-Be-ixA">
+                                <rect key="frame" x="30" y="44" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="back:" destination="e6J-Ir-1iN" eventType="touchUpInside" id="Vv4-xL-awk"/>
+                                    <action selector="signUp:" destination="e6J-Ir-1iN" eventType="touchUpInside" id="XCV-ik-1zR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LYq-Ud-661"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Se-Be-ixA" firstAttribute="leading" secondItem="LYq-Ud-661" secondAttribute="leading" constant="30" id="kpp-Jk-rgN"/>
+                            <constraint firstItem="3Se-Be-ixA" firstAttribute="top" secondItem="LYq-Ud-661" secondAttribute="top" id="ueY-FA-xiw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aIH-Ng-Na6"/>
                     <connections>
@@ -428,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nwg-C5-Liq" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973.8461538461538" y="439.33649289099526"/>
+            <point key="canvasLocation" x="2903.0769230769229" y="439.33649289099526"/>
         </scene>
     </scenes>
     <resources>

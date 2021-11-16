@@ -23,6 +23,11 @@ class RegistrationViewController: UIViewController {
         errorMessage.numberOfLines = -1
 
     }
+    @IBAction func back(_ sender: Any) {
+        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "home") as! HomeViewController
+        self.view.window?.rootViewController = homeVC
+        self.view.window?.makeKeyAndVisible()
+    }
     
     @IBAction func signUp(_ sender: Any) {
         let username = username.text!.trimmingCharacters(in: .whitespacesAndNewlines)
