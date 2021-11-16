@@ -71,7 +71,6 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func addGoal(_ sender: Any) {
         let buttonFrame = addButton.frame
-        print(buttonFrame)
         let popoverContentController = self.storyboard?.instantiateViewController(identifier: "popover") as? PopoverContentController
         popoverContentController?.modalPresentationStyle = .popover
         
@@ -94,6 +93,10 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         fetchTasks()
+    }
+    
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return true
     }
     
     @IBAction func logOut(_ sender: Any) {
