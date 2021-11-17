@@ -32,6 +32,11 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         return task
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calendar.delegate = self

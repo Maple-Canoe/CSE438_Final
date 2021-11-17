@@ -24,7 +24,7 @@ class PopoverContentController: UIViewController {
             alert.addAction(UIAlertAction(title: "I see", style: .cancel, handler: nil))
             self.present(alert, animated: true)
         } else {
-            db.collection("events").addDocument(data: ["uid" : uid, "event_name" : eventName.text!, "event_description" : eventDescription.text!, "event_time" : eventTime.date])
+            db.collection("events").addDocument(data: ["uid" : uid, "event_name" : eventName.text!, "event_description" : eventDescription.text!, "event_time" : eventTime.date, "completed": false])
             eventName.text = ""
             eventDescription.text = ""
             

@@ -45,19 +45,12 @@ class RegistrationViewController: UIViewController {
                     self.errorMessage.alpha = 1
                 } else {
                     let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["username": username, "uid": result!.user.uid, "completed_goal": []]) { (error) in
+                    db.collection("users").addDocument(data: ["username": username, "uid": result!.user.uid]) { (error) in
                         if let error = error {
                             self.errorMessage.text = error.localizedDescription
                             self.errorMessage.alpha = 1
                         }
                     }
-                    
-//                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-//                    changeRequest?.displayName = username
-//                    changeRequest?.commitChanges { error in
-//                        let alert = UIAlertController(title: "Unexpected Error!", message: error?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
-//                        self.present(alert, animated: true)
-//                }
                     
                     let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! UITabBarController
                     self.view.window?.rootViewController = tabVC
