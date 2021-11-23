@@ -31,25 +31,44 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
         return task
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            print("deleted: " + tasksID[indexPath.row])
-            db.collection("events").document(tasksID[indexPath.row]).delete()
-            tasks.remove(at: indexPath.row)
-            tasksID.remove(at: indexPath.row)
-            userID.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-        tableView.reloadData()
-        
-    }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "Complete"){
-                    
-            (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        print(tasksID)
+//
+//        if editingStyle == .delete {
+//            print("deleted: " + tasksID[indexPath.row])
+//            db.collection("events").document(tasksID[indexPath.row]).delete()
+//            tasks.remove(at: indexPath.row)
+//            tasksID.remove(at: indexPath.row)
+//            userID.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//        tableView.reloadData()
+//
+//    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "delete") {
             
+            (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+
+            self.db.collection("events").document(self.tasksID[indexPath.row]).delete()
+            self.tasks.remove(at: indexPath.row)
+            self.tasksID.remove(at: indexPath.row)
+            self.userID.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            completionHandler(true)
+            
+        }
+        
+        deleteAction.backgroundColor = UIColor.systemRed
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        
+        let completeAction = UIContextualAction(style: .normal, title: "Complete"){
+
+            (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+
             self.db.collection("events").document(self.tasksID[indexPath.row]).updateData(["completed": true])
             self.tasks.remove(at: indexPath.row)
             self.tasksID.remove(at: indexPath.row)
@@ -57,10 +76,13 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.deleteRows(at: [indexPath], with: .fade)
             completionHandler(true)
         }
+
+        completeAction.backgroundColor = UIColor.systemGreen
+        completeAction.image = UIImage(systemName: "checkmark.square")
         
-        action.backgroundColor = UIColor.systemGreen
         tableView.reloadData()
-        return UISwipeActionsConfiguration(actions: [action])
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, completeAction])
     }
     
   
@@ -90,18 +112,19 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchTasks() {
         tasks = []
+        tasksID = []
+        userID = []
+        
         db.collection("events").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
             if error != nil {
                 print(error!)
             } else {
                 for document in (snapshot?.documents)! {
-                    print(document)
                     let event_name = document.data()["event_name"] as! String
                     let uid = document.data()["uid"] as! String
                     self.tasks.append(event_name)
                     self.tasksID.append(document.documentID)
                     self.userID.append(uid)
-                    print(event_name)
                 }
                 self.goals.reloadData()
             }
