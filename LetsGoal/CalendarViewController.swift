@@ -34,6 +34,7 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
         tableView.reloadData()
     }
     

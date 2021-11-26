@@ -17,7 +17,7 @@
 		3CB8E80D2740B295002D66C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8E80C2740B295002D66C0 /* LoginViewController.swift */; };
 		3CB8E80F2740BB12002D66C0 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8E80E2740BB12002D66C0 /* RegistrationViewController.swift */; };
 		3CB8E8112740BD26002D66C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CB8E8102740BD26002D66C0 /* GoogleService-Info.plist */; };
-		3CB8E8132740DD45002D66C0 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8E8122740DD45002D66C0 /* GoalViewController.swift */; };
+		3CB8E8132740DD45002D66C0 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8E8122740DD45002D66C0 /* TaskViewController.swift */; };
 		3CB8E81527419ECB002D66C0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8E81427419ECB002D66C0 /* HomeViewController.swift */; };
 		E8078C3427430321007742DB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8078C3327430321007742DB /* CalendarViewController.swift */; };
 		E8078C3627432041007742DB /* PopoverContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8078C3527432041007742DB /* PopoverContentController.swift */; };
@@ -37,7 +37,7 @@
 		3CB8E80C2740B295002D66C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3CB8E80E2740BB12002D66C0 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		3CB8E8102740BD26002D66C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3CB8E8122740DD45002D66C0 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
+		3CB8E8122740DD45002D66C0 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3CB8E81427419ECB002D66C0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8AA139DCC2A11C4D0851876D /* Pods_LetsGoal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LetsGoal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE0DA6E2F7A77EF082AEC4B1 /* Pods-LetsGoal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LetsGoal.debug.xcconfig"; path = "Target Support Files/Pods-LetsGoal/Pods-LetsGoal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 				3CB8E81427419ECB002D66C0 /* HomeViewController.swift */,
 				3CB8E80C2740B295002D66C0 /* LoginViewController.swift */,
 				3CB8E80E2740BB12002D66C0 /* RegistrationViewController.swift */,
-				3CB8E8122740DD45002D66C0 /* GoalViewController.swift */,
+				3CB8E8122740DD45002D66C0 /* TaskViewController.swift */,
 				E8078C3327430321007742DB /* CalendarViewController.swift */,
 				E8078C3527432041007742DB /* PopoverContentController.swift */,
 				E828D072274464820006EB75 /* PopoverDetailController.swift */,
@@ -236,7 +236,7 @@
 				3CB8E7FD2740A213002D66C0 /* ViewController.swift in Sources */,
 				E8078C3627432041007742DB /* PopoverContentController.swift in Sources */,
 				3CB8E7F92740A213002D66C0 /* AppDelegate.swift in Sources */,
-				3CB8E8132740DD45002D66C0 /* GoalViewController.swift in Sources */,
+				3CB8E8132740DD45002D66C0 /* TaskViewController.swift in Sources */,
 				E828D073274464820006EB75 /* PopoverDetailController.swift in Sources */,
 				3CB8E7FB2740A213002D66C0 /* SceneDelegate.swift in Sources */,
 				3CB8E81527419ECB002D66C0 /* HomeViewController.swift in Sources */,

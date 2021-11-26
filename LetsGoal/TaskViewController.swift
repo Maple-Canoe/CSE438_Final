@@ -5,7 +5,7 @@ import FirebaseFirestore
 
 //Reference: https://stackoverflow.com/questions/61657140/how-to-create-a-popover-viewcontroller-like-apples-one
 
-class GoalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
     var handle: AuthStateDidChangeListenerHandle?
     var currentUserID: String?
@@ -13,7 +13,7 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
     let uid = Auth.auth().currentUser!.uid
     
     @IBOutlet weak var welcomeUser: UILabel!
-    @IBOutlet weak var goals: UITableView!
+    @IBOutlet weak var taskTable: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
@@ -91,8 +91,8 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         tableView.delegate=self
-        goals.register(UITableViewCell.self, forCellReuseIdentifier: "task")
-        goals.dataSource = self
+        taskTable.register(UITableViewCell.self, forCellReuseIdentifier: "task")
+        taskTable.dataSource = self
         
         self.db.collection("users").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
             if error != nil {
@@ -126,13 +126,13 @@ class GoalViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.tasksID.append(document.documentID)
                     self.userID.append(uid)
                 }
-                self.goals.reloadData()
+                self.taskTable.reloadData()
             }
         }
     }
     
     
-    @IBAction func addGoal(_ sender: Any) {
+    @IBAction func addTask(_ sender: Any) {
         let buttonFrame = addButton.frame
         let popoverContentController = self.storyboard?.instantiateViewController(identifier: "popover") as? PopoverContentController
         popoverContentController?.modalPresentationStyle = .popover
