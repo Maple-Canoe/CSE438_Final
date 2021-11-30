@@ -45,7 +45,7 @@ class RegistrationViewController: UIViewController {
                     self.errorMessage.alpha = 1
                 } else {
                     let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["username": username, "uid": result!.user.uid]) { (error) in
+                    db.collection("users").addDocument(data: ["username": username, "uid": result!.user.uid, "followings":[]]) { (error) in
                         if let error = error {
                             self.errorMessage.text = error.localizedDescription
                             self.errorMessage.alpha = 1
