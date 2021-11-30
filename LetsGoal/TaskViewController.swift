@@ -115,7 +115,7 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         tasksID = []
         userID = []
         
-        db.collection("events").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
+        db.collection("events").whereField("uid", isEqualTo: uid).whereField("completed", isEqualTo: false).getDocuments { snapshot, error in
             if error != nil {
                 print(error!)
             } else {

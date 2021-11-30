@@ -60,7 +60,7 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         let uid = Auth.auth().currentUser!.uid
         tasks = []
         descript = []
-        db.collection("events").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
+        db.collection("events").whereField("uid", isEqualTo: uid).whereField("completed", isEqualTo: false).getDocuments { snapshot, error in
             if error != nil {
                 print(error!)
             } else {
