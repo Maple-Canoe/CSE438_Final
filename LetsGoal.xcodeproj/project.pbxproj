@@ -22,6 +22,9 @@
 		E8078C3427430321007742DB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8078C3327430321007742DB /* CalendarViewController.swift */; };
 		E8078C3627432041007742DB /* PopoverContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8078C3527432041007742DB /* PopoverContentController.swift */; };
 		E828D073274464820006EB75 /* PopoverDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E828D072274464820006EB75 /* PopoverDetailController.swift */; };
+		E829A61C27594CF1004C7634 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829A61B27594CF1004C7634 /* CustomTableViewCell.swift */; };
+		E829A61E27594CFF004C7634 /* PopoverUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829A61D27594CFF004C7634 /* PopoverUsersController.swift */; };
+		E829A62027594D09004C7634 /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829A61F27594D09004C7634 /* NetworkViewController.swift */; };
 		E890EFDC2756B38500E476C9 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890EFDB2756B38500E476C9 /* UserViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,9 @@
 		E8078C3327430321007742DB /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		E8078C3527432041007742DB /* PopoverContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentController.swift; sourceTree = "<group>"; };
 		E828D072274464820006EB75 /* PopoverDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverDetailController.swift; sourceTree = "<group>"; };
+		E829A61B27594CF1004C7634 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		E829A61D27594CFF004C7634 /* PopoverUsersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverUsersController.swift; sourceTree = "<group>"; };
+		E829A61F27594D09004C7634 /* NetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		E890EFDB2756B38500E476C9 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +96,9 @@
 		3CB8E7F72740A213002D66C0 /* LetsGoal */ = {
 			isa = PBXGroup;
 			children = (
+				E829A61F27594D09004C7634 /* NetworkViewController.swift */,
+				E829A61D27594CFF004C7634 /* PopoverUsersController.swift */,
+				E829A61B27594CF1004C7634 /* CustomTableViewCell.swift */,
 				3CB8E7F82740A213002D66C0 /* AppDelegate.swift */,
 				3CB8E7FA2740A213002D66C0 /* SceneDelegate.swift */,
 				3CB8E7FC2740A213002D66C0 /* ViewController.swift */,
@@ -235,11 +244,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8078C3427430321007742DB /* CalendarViewController.swift in Sources */,
+				E829A61E27594CFF004C7634 /* PopoverUsersController.swift in Sources */,
 				3CB8E80D2740B295002D66C0 /* LoginViewController.swift in Sources */,
 				3CB8E7FD2740A213002D66C0 /* ViewController.swift in Sources */,
 				E890EFDC2756B38500E476C9 /* UserViewController.swift in Sources */,
+				E829A62027594D09004C7634 /* NetworkViewController.swift in Sources */,
 				E8078C3627432041007742DB /* PopoverContentController.swift in Sources */,
 				3CB8E7F92740A213002D66C0 /* AppDelegate.swift in Sources */,
+				E829A61C27594CF1004C7634 /* CustomTableViewCell.swift in Sources */,
 				3CB8E8132740DD45002D66C0 /* TaskViewController.swift in Sources */,
 				E828D073274464820006EB75 /* PopoverDetailController.swift in Sources */,
 				3CB8E7FB2740A213002D66C0 /* SceneDelegate.swift in Sources */,
