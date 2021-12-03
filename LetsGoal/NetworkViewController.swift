@@ -84,7 +84,8 @@ class NetworkViewController: UIViewController, UITableViewDelegate, UITableViewD
                             }
                             else{
                                 for document2 in (snapshot2?.documents)! {
-                                    self.followings.append(document2.data()["username"] as! String)
+                                    let u = document2.data()["username"] as! String
+                                    self.followings = [u] + self.followings
                                     print("doo", self.followings)
                                 }
                             }

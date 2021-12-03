@@ -21,7 +21,8 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
     var currentUserID: String?
     let db = Firestore.firestore()
     let uid = Auth.auth().currentUser!.uid
-    var tasks : [String] = []
+    var tasks : [String: [String]] = [:]
+    var detail: [String: [String]] = [:]
     var selectedDate: String = ""
     var descript: [String] = []
     var followings: [String: [String]] = [:]
@@ -29,8 +30,14 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
     var user: [String] = []
     var uids: [String] = []
     var rows: [Int] = []
+    var index: Int = 0
+    var reverseBool: Bool = true
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if calendar.selectedDate == nil {
+            return 0
+        }
+        reverseBool = !reverseBool
         return rows[section]
     }
     
@@ -40,13 +47,26 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let task = tableView.dequeueReusableCell(withIdentifier: "t")! as UITableViewCell
-        task.textLabel!.text = "Task \(indexPath.row + 1): wtf"
-        return task
+        if calendar.selectedDate != nil {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd-YYYY"
+            let day = dateFormatter.string(from: calendar.selectedDate!)
+            if tasks[day] != nil {
+                print("whatever \(String(describing: tasks[day]))")
+                print("index is \(index)")
+                task.textLabel!.text = "Task \(indexPath.row + 1): \(tasks[day]![index])"
+                if tasks[day]!.count != index + 1 {
+                    index += 1
+                }
+                return task
+            }
+        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print("section number is \(section)")
-        print("user count is \(user.count)")
+        print("rows is \(rows)")
+        print("there are \(rows[section]) for \(user[section])")
         return user[section]
     }
     
@@ -57,6 +77,12 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         tableView.reloadData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if calendar.selectedDate != nil {
+            calendar.deselect(calendar.selectedDate!)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calendar.delegate = self
@@ -65,8 +91,9 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "t")
         // Do any additional setup after loading the view.
     }
-
+    
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        index = 0
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-YYYY"
         selectedDate = dateFormatter.string(from: date)
@@ -138,9 +165,13 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
     
     func fetchFollowings(){
         followings = [:]
+        tableRows = [:]
         user = []
         uids = []
         rows = []
+        tasks = [:]
+        detail = [:]
+        index = 0
         db.collection("users").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
             if error != nil {
                 print(error!)
@@ -165,13 +196,31 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
                                     else{
                                         var stuff: [String] = []
                                         var dates: [String] = []
+                                        var event_detail: [String] = []
                                         for document3 in (snapshot3?.documents)! {
-                                            stuff.append(document3.data()["event_name"] as! String)
+                                            let fetchedEvent = document3.data()["event_name"] as! String
+                                            let fetchedDescription = document3.data()["event_description"] as! String
+                                            stuff.append(fetchedEvent)
+                                            event_detail.append(fetchedDescription)
                                             let d = (document3.get("event_time") as! Timestamp).dateValue()
                                             let dateFormatter = DateFormatter()
                                             dateFormatter.dateFormat = "MM-dd-YYYY"
                                             let taskDate = dateFormatter.string(from: d)
                                             dates.append(taskDate)
+                                            let currentTasks = self.tasks[taskDate]
+                                            let currentDetail = self.detail[taskDate]
+                                            if currentTasks != nil {
+                                                self.tasks[taskDate] = currentTasks! + [fetchedEvent]
+                                            }
+                                            else if currentTasks == nil {
+                                                self.tasks[taskDate] = [fetchedEvent]
+                                            }
+                                            if currentDetail != nil {
+                                                self.detail[taskDate] = currentDetail! + [fetchedDescription]
+                                            }
+                                            else if currentDetail == nil {
+                                                self.detail[taskDate] = [fetchedDescription]
+                                            }
                                         }
                                         self.followings[self.user[self.uids.firstIndex(of: id)!]] = stuff
                                         self.tableRows[self.user[self.uids.firstIndex(of: id)!]] = dates
