@@ -37,7 +37,8 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         if calendar.selectedDate == nil {
             return 0
         }
-        reverseBool = !reverseBool
+        print("current section is \(section)")
+        print("number of rows is \(rows[section])")
         return rows[section]
     }
     
@@ -52,8 +53,8 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
             dateFormatter.dateFormat = "MM-dd-YYYY"
             let day = dateFormatter.string(from: calendar.selectedDate!)
             if tasks[day] != nil {
-                print("whatever \(String(describing: tasks[day]))")
-                print("index is \(index)")
+                //print("whatever \(String(describing: tasks[day]))")
+                //print("index is \(index)")
                 task.textLabel!.text = "Task \(indexPath.row + 1): \(tasks[day]![index])"
                 if tasks[day]!.count != index + 1 {
                     index += 1
@@ -65,8 +66,8 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print("rows is \(rows)")
-        print("there are \(rows[section]) for \(user[section])")
+        //print("rows is \(rows)")
+        //print("there are \(rows[section]) for \(user[section])")
         return user[section]
     }
     
@@ -97,11 +98,11 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-YYYY"
         selectedDate = dateFormatter.string(from: date)
-        print("calendar date is \(String(describing: selectedDate))")
+        //print("calendar date is \(String(describing: selectedDate))")
         rows = []
-        for key in tableRows.keys {
+        for u in user {
             var count = 0
-            for day in tableRows[key]! {
+            for day in tableRows[u]! {
                 if day == selectedDate {
                     count += 1
                 }
@@ -143,9 +144,13 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         let cellFrame = cell.frame
         print(cellFrame)
         let popoverDetailController = self.storyboard?.instantiateViewController(identifier: "detail") as? PopoverDetailController
-        popoverDetailController?.text = descript[indexPath.row]
+        var index = 0
+        for i in 0...indexPath.section {
+            index += rows[i]
+        }
+        index = index - rows[indexPath.section]
+        popoverDetailController?.text = detail[selectedDate]![index + indexPath.row]
         popoverDetailController?.modalPresentationStyle = .popover
-        
         if let popoverPresentationController = popoverDetailController?.popoverPresentationController {
             popoverPresentationController.permittedArrowDirections = .down
             popoverPresentationController.sourceView = self.tableView
@@ -168,7 +173,7 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         tableRows = [:]
         user = []
         uids = []
-        rows = []
+        rows = Array(repeating: 0, count: user.count)
         tasks = [:]
         detail = [:]
         index = 0
@@ -179,6 +184,7 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
                 for document in (snapshot?.documents)! {
                     var followingsID = document.data()["followings"] as! Array<String>
                     followingsID.insert(self.uid, at: 0)
+                    print("followingID is \(followingsID)")
                     for id in followingsID{
                         self.db.collection("users").whereField("uid", isEqualTo: id).getDocuments { snapshot2, error2 in
                             if error2 != nil{
@@ -207,16 +213,18 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
                                             dateFormatter.dateFormat = "MM-dd-YYYY"
                                             let taskDate = dateFormatter.string(from: d)
                                             dates.append(taskDate)
-                                            let currentTasks = self.tasks[taskDate]
-                                            let currentDetail = self.detail[taskDate]
+                                            var currentTasks = self.tasks[taskDate]
+                                            var currentDetail = self.detail[taskDate]
                                             if currentTasks != nil {
-                                                self.tasks[taskDate] = currentTasks! + [fetchedEvent]
+                                                currentTasks!.append(fetchedEvent)
+                                                self.tasks.updateValue(currentTasks!, forKey: taskDate)
                                             }
                                             else if currentTasks == nil {
                                                 self.tasks[taskDate] = [fetchedEvent]
                                             }
                                             if currentDetail != nil {
-                                                self.detail[taskDate] = currentDetail! + [fetchedDescription]
+                                                currentDetail!.append(fetchedDescription)
+                                                self.detail.updateValue(currentDetail!, forKey: taskDate)
                                             }
                                             else if currentDetail == nil {
                                                 self.detail[taskDate] = [fetchedDescription]
