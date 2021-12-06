@@ -24,6 +24,12 @@ class NetworkViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let following = tableView.dequeueReusableCell(withIdentifier: "following")! as UITableViewCell
         following.textLabel!.text = followings[indexPath.row]
+        following.textLabel!.textColor = UIColor.white
+        if(indexPath.row % 2 == 0){
+            following.backgroundColor = UIColor(named: "table")
+        } else{
+            following.backgroundColor = UIColor(named: "button")
+        }
         return following
     }
     
@@ -33,6 +39,8 @@ class NetworkViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate=self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "following")
         tableView.dataSource = self
+        
+        tableView.backgroundColor = UIColor(named: "background_color")
     }
     
     override func viewWillAppear(_ animated: Bool) {

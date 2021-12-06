@@ -59,16 +59,33 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
                 if tasks[day]!.count != index + 1 {
                     index += 1
                 }
+                task.textLabel!.textColor = UIColor.white
+                if(indexPath.row % 2 == 0){
+                    task.backgroundColor = UIColor(named: "table")
+                } else{
+                    task.backgroundColor = UIColor(named: "button")
+                }
                 return task
             }
         }
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //print("rows is \(rows)")
-        //print("there are \(rows[section]) for \(user[section])")
-        return user[section]
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        //print("rows is \(rows)")
+//        //print("there are \(rows[section]) for \(user[section])")
+//        return user[section]
+//    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "light_background_color")
+        let label = UILabel()
+        label.text = user[section]
+        label.textColor = UIColor.white
+        label.frame = CGRect(x: 15, y: 5, width: 100, height: 20)
+        view.addSubview(label)
+        return view
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +107,7 @@ class CalendarViewController: UIViewController,FSCalendarDelegate, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "t")
-        // Do any additional setup after loading the view.
+        tableView.backgroundColor = UIColor(named: "background_color")
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {

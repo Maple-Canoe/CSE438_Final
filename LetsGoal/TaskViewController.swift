@@ -20,6 +20,7 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tasks : [String] = []
     var tasksID : [String] = []
     var userID : [String] = []
+    @IBOutlet weak var logoutButton: UIButton!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
@@ -28,6 +29,12 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let task = tableView.dequeueReusableCell(withIdentifier: "task")! as UITableViewCell
         task.textLabel!.text = tasks[indexPath.row]
+        task.textLabel!.textColor = UIColor.white
+        if(indexPath.row % 2 == 0){
+            task.backgroundColor = UIColor(named: "table")
+        } else{
+            task.backgroundColor = UIColor(named: "button")
+        }
         return task
     }
     
@@ -57,6 +64,9 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tasksID.remove(at: indexPath.row)
             self.userID.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            self.fetchTasks()
+            
             completionHandler(true)
             
         }
@@ -74,13 +84,16 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tasksID.remove(at: indexPath.row)
             self.userID.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            self.fetchTasks()
+            
             completionHandler(true)
         }
 
-        completeAction.backgroundColor = UIColor.systemGreen
+        completeAction.backgroundColor = UIColor.systemBlue
         completeAction.image = UIImage(systemName: "checkmark.square")
         
-        tableView.reloadData()
+//        tableView.reloadData()
         
         return UISwipeActionsConfiguration(actions: [deleteAction, completeAction])
     }
@@ -90,9 +103,15 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         super.viewDidLoad()
         
-        tableView.delegate=self
+        logoutButton.backgroundColor = UIColor(named: "button")
+        logoutButton.layer.cornerRadius = 20
+        logoutButton.tintColor = UIColor.white
+        
+        taskTable.delegate=self
         taskTable.register(UITableViewCell.self, forCellReuseIdentifier: "task")
         taskTable.dataSource = self
+        taskTable.backgroundColor = UIColor(named: "background_color")
+        
         
         self.db.collection("users").whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
             if error != nil {
@@ -100,10 +119,11 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else {
                 let document = (snapshot?.documents)![0]
                 if let username = document.data()["username"] as? String {
-                    self.welcomeUser.text = "Welcome, \(username)!"
+                    self.welcomeUser.text = "\(username)"
                 }
             }
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

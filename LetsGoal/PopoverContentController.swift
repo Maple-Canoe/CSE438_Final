@@ -8,6 +8,7 @@ class PopoverContentController: UIViewController {
     @IBOutlet weak var eventName: UITextView!
     @IBOutlet weak var eventDescription: UITextView!
     @IBOutlet weak var eventTime: UIDatePicker!
+    @IBOutlet weak var submitButton: UIButton!
     
     let db = Firestore.firestore()
     let uid = Auth.auth().currentUser!.uid
@@ -15,6 +16,10 @@ class PopoverContentController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        submitButton.backgroundColor = UIColor(named: "button")
+        submitButton.layer.cornerRadius = 15
+        submitButton.tintColor = UIColor.white
     }
 
     

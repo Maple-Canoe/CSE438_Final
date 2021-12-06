@@ -7,6 +7,8 @@ import FirebaseFirestore
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var loginButton: UIButton!
+    
     @IBOutlet weak var email: UITextField!
     
     @IBOutlet weak var password: UITextField!
@@ -19,6 +21,10 @@ class LoginViewController: UIViewController {
         errorMessage.alpha = 0
         errorMessage.textColor = .red
         errorMessage.numberOfLines = -1
+        
+        loginButton.backgroundColor = UIColor(named: "button")
+        loginButton.layer.cornerRadius = 20
+        loginButton.tintColor = UIColor.white
 
     }
     

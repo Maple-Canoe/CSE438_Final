@@ -36,9 +36,21 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         if tableView == completedGoals {
             task.textLabel!.text = tasks[indexPath.row]
+            task.textLabel!.textColor = UIColor.white
+            if(indexPath.row % 2 == 0){
+                task.backgroundColor = UIColor(named: "dark_blue")
+            } else{
+                task.backgroundColor = UIColor(named: "light_blue")
+            }
         }
         else {
             task.textLabel!.text = expired[indexPath.row]
+            task.textLabel!.textColor = UIColor.lightGray
+            if(indexPath.row % 2 == 0){
+                task.backgroundColor = UIColor(named: "light_yellow")
+            } else{
+                task.backgroundColor = UIColor(named: "dark_yellow")
+            }
         }
         return task
     }
@@ -64,7 +76,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
                     else {
                         let date = (document.data()["event_time"] as! Timestamp).dateValue()
                         let today = date.timeIntervalSinceNow
-                        if today < 0 {
+                        if today <= 1 {
                             self.expired.append(event_name)
                         }
                     }
@@ -85,7 +97,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         expiredGoals.delegate = self
         expiredGoals.dataSource = self
         expiredGoals.register(UITableViewCell.self, forCellReuseIdentifier: "stuff")
-        // Do any additional setup after loading the view.
+        
+        completedGoals.backgroundColor = UIColor(named: "background_color")
+        expiredGoals.backgroundColor = UIColor(named: "background_color")
+
     }
     
 

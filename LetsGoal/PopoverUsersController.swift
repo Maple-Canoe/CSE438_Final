@@ -26,13 +26,17 @@ class PopoverUsersController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let user = tableView.dequeueReusableCell(withIdentifier: "user")! as! CustomTableViewCell
         user.textLabel!.text = users[indexPath.row]
+        user.textLabel!.textColor = UIColor.white
 //        user.followButton.setTitle("follow", for: .normal)
+        user.backgroundColor = UIColor(named: "light_background_color")
         if self.isFollowed[indexPath.row]{
             user.followButton.setTitle("followed", for: .normal)
-            user.followButton.setTitleColor(UIColor.gray, for: .normal)
+            user.followButton.setTitleColor(UIColor.lightGray, for: .normal)
         }
         else{
             user.followButton.setTitle("follow", for: .normal)
+            user.followButton.setTitleColor(UIColor(named:"button"), for: .normal)
+
         }
         user.followButton.tag = indexPath.row
         user.followButton.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
@@ -72,6 +76,8 @@ class PopoverUsersController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.delegate=self
         tableView.dataSource = self
+        
+        tableView.backgroundColor = UIColor(named: "lighter_background_color")
     }
     
     override func viewWillAppear(_ animated: Bool) {
