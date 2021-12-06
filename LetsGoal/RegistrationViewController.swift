@@ -15,12 +15,17 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var errorMessage: UILabel!
     
+    @IBOutlet weak var signUpButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         errorMessage.alpha = 0
         errorMessage.textColor = .red
         errorMessage.numberOfLines = -1
+        
+        signUpButton.backgroundColor = UIColor(named: "button")
+        signUpButton.layer.cornerRadius = 20
+        signUpButton.tintColor = UIColor.white
 
     }
     @IBAction func back(_ sender: Any) {
